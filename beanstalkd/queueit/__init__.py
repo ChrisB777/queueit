@@ -50,13 +50,15 @@ def _get_qconnection(host, port):
         print "Can't connect to %s:%s" % (host, port)
         sys.exit(1)
 
+
 def qwatch(tube_name, qconn=None):
     if not qconn:
         qconn = _get_qconnection(QHOST, QPORT)
     qconn.watch(tube_name)
     print 'New Job'
     qconn.close()
-        
+
+
 def qget(tube_name, qconn=None):
     """
     Reserving job from the tube, printing the job.body and deleting that job.
@@ -334,7 +336,7 @@ def main():
                 print "Usage: %s <queue>" % (COMMAND)
                 sys.exit(1)
             qwatch(args[0])
-	elif COMMAND == 'q-get
+	elif COMMAND == 'q-get:
             if not len(args) == 1:
                 print "Usage: %s <queue>" % (COMMAND)
                 sys.exit(1)
