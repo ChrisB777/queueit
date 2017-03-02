@@ -362,9 +362,9 @@ def main():
                 print "Usage: %s <queue>" % (COMMAND)
                 sys.exit(1)
             qget(args[0])
-        elif COMMAND == 'q-wrapper':
+        elif COMMAND == 'q-copy':
             if len(args) == 2:
-                qwrapper(args[0], args[1])
+                qcopy(args[0], args[1])
             else:
                 print "Usage: %s <queue-in> <queue-out>" % (COMMAND)
                 print sys.exit(1)
