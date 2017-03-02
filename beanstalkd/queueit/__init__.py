@@ -51,10 +51,11 @@ def _get_qconnection(host, port):
         sys.exit(1)
 
 def qwatch(tube_name, qconn=None):
-     if not qconn:
-         qconn = _get_qconnection(QHOST, QPORT)
-     qconn.watch(tube_name)
-     print 'New Job'
+    if not qconn:
+        qconn = _get_qconnection(QHOST, QPORT)
+    qconn.watch(tube_name)
+    print 'New Job'
+    qconn.close()
         
 def qget(tube_name, qconn=None):
     """
@@ -329,12 +330,11 @@ def main():
 
 
         if COMMAND == 'q-watch':
-             if not len(args) == 1:
-                 print "Usage: %s <queue>" % (COMMAND)
-                 sys.exit(1)
-             qwatch(args[0])
-	
-        elif COMMAND == 'q-get
+            if not len(args) == 1:
+                print "Usage: %s <queue>" % (COMMAND)
+                sys.exit(1)
+            qwatch(args[0])
+	elif COMMAND == 'q-get
             if not len(args) == 1:
                 print "Usage: %s <queue>" % (COMMAND)
                 sys.exit(1)
