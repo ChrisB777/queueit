@@ -282,6 +282,24 @@ def qwrapper(tube_in, tube_out, worker_cmd):
             job.delete()
 
 
+def qcopy(tube_in, tube_out):
+    import subprocess
+    qconn_in  = _get_qconnection(QHOST, QPORT)
+    qconn_out = _get_qconnection(QHOST, QPORT)
+    qconn_in.watch(tube_in)
+    qconn_out.use(tube_out)
+    
+    LOG.info(u"QHOST: %s, QPORT %s, TTR %s, PRIORITY %s, Watching queues: %s" % (QHOST, QPORT, QTTR, QPRIORITY, qconn_in.watching()) )
+    job = qconn_in.reserve()
+        
+    LOG.info(u"Got job {0}".format(job.stats()))
+        
+    if tube_out != "null":
+        jid = qconn_out.put(str(job.body), ttr=QTTR, priority=QPRIORITY)
+        LOG.info(u"New job put in to %s: %s" % (tube_out, jid))
+        job.delete()
+
+
 def qpeeknext(qname, peek_type):
     '''
     peeks at the next job in a tube
@@ -317,6 +335,7 @@ def main():
                 print "Usage:"
                 print "%s q-watch" % COMMAND
                 print "%s q-get" % COMMAND
+                print "%s q-copy" % COMMAND
                 print "%s q-put" % COMMAND
                 print "%s q-kick" % COMMAND
                 print "%s q-stat" % COMMAND
@@ -338,11 +357,17 @@ def main():
                 print "Usage: %s <queue>" % (COMMAND)
                 sys.exit(1)
             qwatch(args[0])
-	elif COMMAND == 'q-get':
+        elif COMMAND == 'q-get':
             if not len(args) == 1:
                 print "Usage: %s <queue>" % (COMMAND)
                 sys.exit(1)
             qget(args[0])
+        elif COMMAND == 'q-wrapper':
+            if len(args) == 2:
+                qwrapper(args[0], args[1])
+            else:
+                print "Usage: %s <queue-in> <queue-out>" % (COMMAND)
+                print sys.exit(1)
         elif COMMAND == 'q-put':
             if len(args) == 1:
                 qput(args[0], [sys.stdin.read(),])

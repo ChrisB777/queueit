@@ -7,6 +7,7 @@ all:
 	make q-wrapper
 	make q-wrapper-batch
 	make q-cleanup
+	make q-copy
 
 q-watch:
 	ln -s queueit/__init__.py q-watch
@@ -31,3 +32,6 @@ q-wrapper-batch:
 
 q-cleanup:
 	ln -s queueit/__init__.py q-cleanup
+
+q-copy:
+	ln -s queueit/__init__.py q-copy

@@ -9,6 +9,7 @@ setup(
 
     entry_points={
         'console_scripts': [
+            'q-copy = queueit:main',
             'q-peek = queueit:main',
             'q-peek-ready = queueit:main',
             'q-peek-delayed = queueit:main',
