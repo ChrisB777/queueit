@@ -336,7 +336,7 @@ def main():
                 print "Usage: %s <queue>" % (COMMAND)
                 sys.exit(1)
             qwatch(args[0])
-	elif COMMAND == 'q-get:
+	elif COMMAND == 'q-get':
             if not len(args) == 1:
                 print "Usage: %s <queue>" % (COMMAND)
                 sys.exit(1)
