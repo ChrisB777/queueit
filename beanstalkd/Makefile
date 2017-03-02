@@ -1,4 +1,5 @@
 all:
+	make q-watch
 	make q-get
 	make q-put
 	make q-kick
@@ -6,6 +7,9 @@ all:
 	make q-wrapper
 	make q-wrapper-batch
 	make q-cleanup
+
+q-watch:
+ 	ln -s queueit/__init__.py q-watch
 
 q-get:
 	ln -s queueit/__init__.py q-get
