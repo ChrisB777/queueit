@@ -55,7 +55,9 @@ def qwatch(tube_name, qconn=None):
     if not qconn:
         qconn = _get_qconnection(QHOST, QPORT)
     qconn.watch(tube_name)
+    job = qconn.reserve()
     print 'New Job'
+    job.release()
     qconn.close()
 
 
