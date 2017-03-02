@@ -9,7 +9,7 @@ all:
 	make q-cleanup
 
 q-watch:
- 	ln -s queueit/__init__.py q-watch
+	ln -s queueit/__init__.py q-watch
 
 q-get:
 	ln -s queueit/__init__.py q-get
